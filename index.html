@@ -7,30 +7,83 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
+    /* ===== ANIMASI LATAR BELAKANG BINTANG JATUH ===== */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .night {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      transform: rotate(45deg);
+    }
+
+    .shooting_star {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      height: 2px;
+      background: linear-gradient(-45deg, rgba(95, 145, 255, 1), rgba(0, 0, 255, 0));
+      border-radius: 999px;
+      filter: drop-shadow(0 0 6px rgba(105, 155, 255, 1));
+      animation: tail 3000ms ease-in-out infinite, shooting 3000ms ease-in-out infinite;
+    }
+
+    .shooting_star::before,
+    .shooting_star::after {
+      content: '';
+      position: absolute;
+      top: calc(50% - 1px);
+      right: 0;
+      height: 2px;
+      background: linear-gradient(-45deg, rgba(0, 0, 255, 0), rgba(95, 145, 255, 1), rgba(0, 0, 255, 0));
+      border-radius: 100%;
+      animation: shining 3000ms ease-in-out infinite;
+    }
+
+    .shooting_star::before {
+      transform: translateX(50%) rotate(45deg);
+    }
+
+    .shooting_star::after {
+      transform: translateX(50%) rotate(-45deg);
+    }
+
+    /* Generate 20 bintang jatuh dengan delay acak via CSS */
+    /* Karena CSS tidak punya loop, kita tulis manual dengan delay berbeda */
+    @for $i from 1 through 20 {
+      /* Tidak bisa di CSS murni → kita gunakan JS atau tulis manual */
+    }
+
+    /* Solusi: Gunakan JavaScript untuk generate elemen + style random */
+    /* Tapi untuk kesederhanaan, kita buat 20 elemen di HTML dan beri class unik via inline style */
+
+    /* ===== KONTEN UTAMA ===== */
+    #main-content {
+      position: relative;
+      z-index: 10;
+      color: white;
+    }
+
+    /* ===== SISA DESAIN DNEDIA ===== */
     :root {
       --primary: #00f5ff;
       --secondary: #00ff80;
       --dark: #121212;
-      --light: #ffffff;
-      --card-bg: #1e1e1e;
       --text: #f0f0f0;
-      --nav-bg: rgba(18, 18, 18, 0.95);
+      --nav-bg: rgba(10, 12, 20, 0.85); /* transparan agar bintang terlihat di belakang */
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: var(--dark);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    /* Header & Navbar */
     header {
       display: flex;
       justify-content: space-between;
@@ -40,19 +93,17 @@
       top: 0;
       background: var(--nav-bg);
       backdrop-filter: blur(10px);
-      z-index: 100;
+      z-index: 20;
     }
 
     .logo img {
       height: 40px;
     }
 
-    /* Desktop Navbar */
     nav ul {
       display: flex;
       list-style: none;
       gap: 1.5rem;
-      align-items: center;
     }
 
     nav a {
@@ -77,10 +128,8 @@
       width: 25px;
       height: 3px;
       background: var(--text);
-      transition: 0.3s;
     }
 
-    /* Mobile Menu */
     #mobile-menu {
       display: none;
       position: fixed;
@@ -90,7 +139,7 @@
       background: var(--nav-bg);
       padding: 1.2rem;
       box-shadow: 0 6px 12px rgba(0,0,0,0.4);
-      z-index: 99;
+      z-index: 20;
     }
 
     #mobile-menu ul {
@@ -107,40 +156,11 @@
       font-weight: 600;
     }
 
-    #mobile-menu a:hover {
-      background: rgba(0, 255, 128, 0.1);
-      color: var(--secondary);
-    }
-
-    /* Hero Section */
     .hero {
       text-align: center;
       padding: 4rem 2rem;
-      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
       position: relative;
       overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(0,245,255,0.1) 0%, transparent 70%);
-      animation: rotate 20s linear infinite;
-      z-index: 0;
-    }
-
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
     }
 
     .hero h1 {
@@ -156,6 +176,7 @@
     .hero p {
       font-size: 1.1rem;
       margin-bottom: 1.8rem;
+      color: #e0e0ff;
     }
 
     .cta-buttons {
@@ -177,21 +198,13 @@
 
     .btn-primary {
       background: var(--primary);
-      color: var(--dark);
+      color: #000;
     }
 
     .btn-secondary {
       background: transparent;
       border: 2px solid var(--secondary);
       color: var(--secondary);
-    }
-
-    .btn-primary:hover {
-      background: #00d0d9;
-    }
-
-    .btn-secondary:hover {
-      background: rgba(0, 255, 128, 0.15);
     }
 
     .social-icons-hero {
@@ -202,7 +215,7 @@
     }
 
     .social-icons-hero a {
-      color: var(--text);
+      color: white;
       font-size: 1.5rem;
       transition: color 0.3s;
     }
@@ -211,9 +224,10 @@
       color: var(--secondary);
     }
 
-    /* Sections */
     section {
       padding: 2.5rem 2rem;
+      position: relative;
+      z-index: 10;
     }
 
     .section-title {
@@ -221,6 +235,7 @@
       margin-bottom: 2rem;
       font-size: 2.2rem;
       font-weight: 700;
+      color: white;
     }
 
     .cards {
@@ -232,11 +247,13 @@
     }
 
     .card {
-      background: var(--card-bg);
+      background: rgba(20, 25, 45, 0.6);
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(5px);
       transition: transform 0.3s;
+      border: 1px solid rgba(0, 245, 255, 0.2);
     }
 
     .card:hover {
@@ -256,6 +273,7 @@
     .card h3 {
       margin-bottom: 0.6rem;
       font-size: 1.2rem;
+      color: white;
     }
 
     .card p {
@@ -264,7 +282,7 @@
     }
 
     .fun-fact {
-      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      background: rgba(26, 26, 46, 0.7);
       text-align: center;
       padding: 3.5rem 2rem;
       margin: 3rem 0;
@@ -273,16 +291,8 @@
       margin-left: auto;
       margin-right: auto;
       position: relative;
-      overflow: hidden;
-    }
-
-    .fun-fact::after {
-      content: "💡";
-      position: absolute;
-      top: -20px;
-      right: 20px;
-      font-size: 4rem;
-      opacity: 0.1;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(0, 255, 128, 0.3);
     }
 
     .fun-fact h2 {
@@ -294,16 +304,15 @@
     .fun-fact p {
       font-size: 1.25rem;
       line-height: 1.7;
+      color: white;
     }
 
     footer {
-      background: #0a0a0a;
+      background: rgba(10, 12, 20, 0.85);
       padding: 3rem 2rem;
       text-align: center;
-    }
-
-    .footer-logo {
-      margin-bottom: 1.2rem;
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(0, 245, 255, 0.1);
     }
 
     .footer-logo img {
@@ -334,116 +343,76 @@
       font-size: 0.9rem;
     }
 
-    /* MOBILE STYLES */
+    /* Animasi keyframes */
+    @keyframes tail {
+      0%, 100% { width: 0; }
+      30% { width: 100px; }
+    }
+
+    @keyframes shining {
+      0%, 100% { width: 0; }
+      50% { width: 30px; }
+    }
+
+    @keyframes shooting {
+      0% { transform: translateX(0) translateY(0); }
+      100% { transform: translateX(300px) translateY(-300px); }
+    }
+
+    /* RESPONSIVE */
     @media (max-width: 768px) {
-      /* Sembunyikan navbar desktop */
-      nav ul {
-        display: none;
-      }
-
-      /* Tampilkan hamburger */
-      .hamburger {
-        display: flex;
-      }
-
-      /* Hero lebih ringkas */
-      .hero {
-        padding: 3rem 1.5rem;
-      }
-      .hero h1 {
-        font-size: 2rem;
-      }
-      .hero p {
-        font-size: 0.95rem;
-      }
+      nav ul { display: none; }
+      .hamburger { display: flex; }
+      .hero h1 { font-size: 2rem; }
       .cta-buttons {
         flex-direction: column;
         align-items: center;
         gap: 1rem;
       }
-      .btn {
-        width: 85%;
-        font-size: 1rem;
-      }
-
-      .section-title {
-        font-size: 1.7rem;
-      }
-
-      .card img {
-        height: 150px;
-      }
-
-      .fun-fact {
-        padding: 2.5rem 1.5rem;
-      }
-
-      .fun-fact h2 {
-        font-size: 1.6rem;
-      }
-
-      .social-icons-hero {
-        gap: 1.2rem;
-      }
-
-      .social-icons-hero a {
-        font-size: 1.3rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero h1 {
-        font-size: 1.7rem;
-      }
-      .section-title {
-        font-size: 1.5rem;
-      }
-      .footer-links {
-        gap: 1.2rem;
-        flex-wrap: wrap;
-      }
+      .btn { width: 85%; }
+      .section-title { font-size: 1.7rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
-  <header>
-    <div class="logo">
-      <img src="LOGO DNEDIA.png" alt="Dnedia News Logo">
-    </div>
+  <!-- Background Animasi -->
+  <div class="night" id="stars-bg"></div>
 
-    <!-- Desktop Navbar -->
-    <nav>
+  <!-- Konten Utama -->
+  <div id="main-content">
+
+    <!-- Header -->
+    <header>
+      <div class="logo">
+        <img src="LOGO DNEDIA.png" alt="Dnedia News Logo">
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#beranda">Beranda</a></li>
+          <li><a href="#berita">Berita</a></li>
+          <li><a href="#hiburan">Hiburan</a></li>
+          <li><a href="#funfact">Fun Fact</a></li>
+        </ul>
+      </nav>
+      <div class="hamburger" id="hamburger">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </header>
+
+    <div id="mobile-menu">
       <ul>
         <li><a href="#beranda">Beranda</a></li>
         <li><a href="#berita">Berita</a></li>
         <li><a href="#hiburan">Hiburan</a></li>
         <li><a href="#funfact">Fun Fact</a></li>
       </ul>
-    </nav>
-
-    <!-- Hamburger for Mobile -->
-    <div class="hamburger" id="hamburger">
-      <div></div>
-      <div></div>
-      <div></div>
     </div>
-  </header>
 
-  <!-- Mobile Menu -->
-  <div id="mobile-menu">
-    <ul>
-      <li><a href="#beranda">Beranda</a></li>
-      <li><a href="#berita">Berita</a></li>
-      <li><a href="#hiburan">Hiburan</a></li>
-      <li><a href="#funfact">Fun Fact</a></li>
-    </ul>
-  </div>
-
-  <!-- Hero Section -->
-  <div class="hero" id="beranda">
-    <div class="hero-content">
+    <!-- Hero -->
+    <div class="hero" id="beranda">
       <h1>DNEDIA NEWS</h1>
       <p>Berita Terkini • Hiburan Seru • Fakta Unik — Semua Untuk Kamu!</p>
       <div class="cta-buttons">
@@ -457,92 +426,107 @@
         <a href="https://www.facebook.com/dnediaa" target="_blank"><i class="fab fa-facebook"></i></a>
       </div>
     </div>
+
+    <!-- Berita -->
+    <section id="berita">
+      <h2 class="section-title">📰 Berita Terkini</h2>
+      <div class="cards">
+        <div class="card">
+          <img src="https://via.placeholder.com/300x170/1e1e1e/00f5ff?text=Berita+1" alt="Berita 1">
+          <div class="card-content">
+            <h3>Judul Berita Pertama</h3>
+            <p>12 Des 2025 • 2 menit baca</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://via.placeholder.com/300x170/1e1e1e/00ff80?text=Berita+2" alt="Berita 2">
+          <div class="card-content">
+            <h3>Judul Berita Kedua</h3>
+            <p>10 Des 2025 • 3 menit baca</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hiburan -->
+    <section id="hiburan">
+      <h2 class="section-title">🎭 Hiburan & Gaya Hidup</h2>
+      <div class="cards">
+        <div class="card">
+          <img src="https://via.placeholder.com/300x170/1e1e1e/ff00ff?text=Hiburan+1" alt="Hiburan 1">
+          <div class="card-content">
+            <h3>5 Film Terbaik Minggu Ini</h3>
+            <p>Tonton rekomendasi film akhir pekan!</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://via.placeholder.com/300x170/1e1e1e/ffff00?text=TikTok+Viral" alt="TikTok">
+          <div class="card-content">
+            <h3>Trending di TikTok Hari Ini</h3>
+            <p>Challenge terbaru yang bikin heboh!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fun Fact -->
+    <section id="funfact">
+      <div class="fun-fact">
+        <h2>✨ Fun Fact Hari Ini</h2>
+        <p>
+          Tahukah kamu? Gurita memiliki tiga jantung, dan dua di antaranya berhenti berdetak saat mereka berenang!
+        </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-logo">
+        <img src="LOGO DNEDIA.png" alt="Dnedia News">
+      </div>
+      <div class="footer-links">
+        <a href="#beranda">Beranda</a>
+        <a href="#berita">Berita</a>
+        <a href="#hiburan">Hiburan</a>
+        <a href="#funfact">Fun Fact</a>
+        <a href="#">Kontak</a>
+        <a href="#">Kebijakan Privasi</a>
+      </div>
+      <p class="copyright">
+        &copy; 2026 Dnedia News. All rights reserved.
+      </p>
+    </footer>
+
   </div>
 
-  <!-- Berita -->
-  <section id="berita">
-    <h2 class="section-title">📰 Berita Terkini</h2>
-    <div class="cards">
-      <div class="card">
-        <img src="https://via.placeholder.com/300x170/1e1e1e/00f5ff?text=Berita+1" alt="Berita 1">
-        <div class="card-content">
-          <h3>Judul Berita Pertama</h3>
-          <p>12 Des 2025 • 2 menit baca</p>
-        </div>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/300x170/1e1e1e/00ff80?text=Berita+2" alt="Berita 2">
-        <div class="card-content">
-          <h3>Judul Berita Kedua</h3>
-          <p>10 Des 2025 • 3 menit baca</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Hiburan -->
-  <section id="hiburan">
-    <h2 class="section-title">🎭 Hiburan & Gaya Hidup</h2>
-    <div class="cards">
-      <div class="card">
-        <img src="https://via.placeholder.com/300x170/1e1e1e/ff00ff?text=Hiburan+1" alt="Hiburan 1">
-        <div class="card-content">
-          <h3>5 Film Terbaik Minggu Ini</h3>
-          <p>Tonton rekomendasi film akhir pekan!</p>
-        </div>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/300x170/1e1e1e/ffff00?text=TikTok+Viral" alt="TikTok">
-        <div class="card-content">
-          <h3>Trending di TikTok Hari Ini</h3>
-          <p>Challenge terbaru yang bikin heboh!</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Fun Fact -->
-  <section id="funfact">
-    <div class="fun-fact">
-      <h2>✨ Fun Fact Hari Ini</h2>
-      <p>
-        Tahukah kamu? Gurita memiliki tiga jantung, dan dua di antaranya berhenti berdetak saat mereka berenang!
-      </p>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-logo">
-      <img src="LOGO DNEDIA.png" alt="Dnedia News">
-    </div>
-    <div class="footer-links">
-      <a href="#beranda">Beranda</a>
-      <a href="#berita">Berita</a>
-      <a href="#hiburan">Hiburan</a>
-      <a href="#funfact">Fun Fact</a>
-      <a href="#">Kontak</a>
-      <a href="#">Kebijakan Privasi</a>
-    </div>
-    <p class="copyright">
-      &copy; 2026 Dnedia News. All rights reserved.
-    </p>
-  </footer>
-
-  <!-- JavaScript: Hamburger Toggle -->
+  <!-- Generate 20 Shooting Stars via JavaScript -->
   <script>
+    const starsBg = document.getElementById('stars-bg');
+    const delays = [];
+    for (let i = 0; i < 20; i++) {
+      const star = document.createElement('div');
+      star.className = 'shooting_star';
+      
+      // Random position & delay
+      const topOffset = (Math.random() * 400 - 200) + 'px';
+      const leftOffset = (Math.random() * 300) + 'px';
+      const delay = Math.random() * 10000 + 'ms';
+      
+      star.style.top = `calc(50% - ${topOffset})`;
+      star.style.left = `calc(50% - ${leftOffset})`;
+      star.style.animationDelay = delay;
+      
+      starsBg.appendChild(star);
+    }
+
+    // Hamburger toggle
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
 
     hamburger.addEventListener('click', () => {
-      if (mobileMenu.style.display === 'block') {
-        mobileMenu.style.display = 'none';
-      } else {
-        mobileMenu.style.display = 'block';
-      }
+      mobileMenu.style.display = mobileMenu.style.display === 'block' ? 'none' : 'block';
     });
 
-    // Tutup menu saat klik di luar
     document.addEventListener('click', (e) => {
       if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
         mobileMenu.style.display = 'none';
