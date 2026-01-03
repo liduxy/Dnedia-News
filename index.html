@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    /* ===== ANIMASI LATAR BELAKANG BINTANG JATUH ===== */
+    /* ===== BACKGROUND ANIMASI METEOR YANG REALISTIS ===== */
     body {
       margin: 0;
       padding: 0;
@@ -25,63 +25,81 @@
       width: 100%;
       height: 100%;
       z-index: 0;
-      transform: rotate(45deg);
+      /* ❌ HAPUS ROTATE — tidak perlu memiringkan seluruh langit */
     }
 
     .shooting_star {
       position: absolute;
-      left: 50%;
-      top: 50%;
+      /* Mulai dari luar layar atas-kiri */
+      top: -50px;
+      left: -50px;
       height: 2px;
-      background: linear-gradient(-45deg, rgba(95, 145, 255, 1), rgba(0, 0, 255, 0));
+      width: 0;
+      background: linear-gradient(-45deg, rgba(95, 145, 255, 1), transparent);
       border-radius: 999px;
-      filter: drop-shadow(0 0 6px rgba(105, 155, 255, 1));
-      animation: tail 3000ms ease-in-out infinite, shooting 3000ms ease-in-out infinite;
+      filter: drop-shadow(0 0 8px rgba(100, 200, 255, 0.8));
+      /* Rotasi kecil agar terlihat miring saat jatuh */
+      transform: rotate(20deg);
+      animation: tail 2500ms ease-out, shooting 2500ms ease-out;
+      animation-fill-mode: forwards;
     }
 
     .shooting_star::before,
     .shooting_star::after {
       content: '';
       position: absolute;
-      top: calc(50% - 1px);
+      top: -1px;
       right: 0;
       height: 2px;
-      background: linear-gradient(-45deg, rgba(0, 0, 255, 0), rgba(95, 145, 255, 1), rgba(0, 0, 255, 0));
+      background: linear-gradient(-45deg, transparent, rgba(95, 145, 255, 1), transparent);
       border-radius: 100%;
-      animation: shining 3000ms ease-in-out infinite;
+      animation: shining 2500ms ease-out;
+      animation-fill-mode: forwards;
     }
 
     .shooting_star::before {
-      transform: translateX(50%) rotate(45deg);
+      transform: translateX(50%) rotate(30deg);
     }
 
     .shooting_star::after {
-      transform: translateX(50%) rotate(-45deg);
+      transform: translateX(50%) rotate(-30deg);
     }
 
-    /* Generate 20 bintang jatuh dengan delay acak via CSS */
-    /* Karena CSS tidak punya loop, kita tulis manual dengan delay berbeda */
-    @for $i from 1 through 20 {
-      /* Tidak bisa di CSS murni → kita gunakan JS atau tulis manual */
+    /* ===== ANIMASI UTAMA ===== */
+    @keyframes tail {
+      0% { width: 0; opacity: 0; }
+      10% { opacity: 1; }
+      90% { width: 120px; }
+      100% { width: 0; opacity: 0; }
     }
 
-    /* Solusi: Gunakan JavaScript untuk generate elemen + style random */
-    /* Tapi untuk kesederhanaan, kita buat 20 elemen di HTML dan beri class unik via inline style */
+    @keyframes shining {
+      0% { width: 0; opacity: 0; }
+      15% { opacity: 1; }
+      50% { width: 40px; }
+      100% { width: 0; opacity: 0; }
+    }
 
-    /* ===== KONTEN UTAMA ===== */
+    @keyframes shooting {
+      0% {
+        transform: translate(0, 0) rotate(20deg);
+      }
+      100% {
+        /* Jatuh diagonal: ke kanan-bawah */
+        transform: translate(300px, 400px) rotate(20deg);
+      }
+    }
+
+    /* ===== KONTEN UTAMA DNEDIA ===== */
     #main-content {
       position: relative;
       z-index: 10;
-      color: white;
     }
 
-    /* ===== SISA DESAIN DNEDIA ===== */
     :root {
       --primary: #00f5ff;
       --secondary: #00ff80;
-      --dark: #121212;
-      --text: #f0f0f0;
-      --nav-bg: rgba(10, 12, 20, 0.85); /* transparan agar bintang terlihat di belakang */
+      --nav-bg: rgba(10, 15, 30, 0.8);
     }
 
     header {
@@ -94,6 +112,7 @@
       background: var(--nav-bg);
       backdrop-filter: blur(10px);
       z-index: 20;
+      color: white;
     }
 
     .logo img {
@@ -107,10 +126,9 @@
     }
 
     nav a {
-      color: var(--text);
+      color: white;
       text-decoration: none;
       font-weight: 600;
-      transition: color 0.3s;
     }
 
     nav a:hover {
@@ -127,7 +145,7 @@
     .hamburger div {
       width: 25px;
       height: 3px;
-      background: var(--text);
+      background: white;
     }
 
     #mobile-menu {
@@ -149,7 +167,7 @@
     }
 
     #mobile-menu a {
-      color: var(--text);
+      color: white;
       text-decoration: none;
       padding: 0.6rem 1rem;
       border-radius: 8px;
@@ -159,8 +177,7 @@
     .hero {
       text-align: center;
       padding: 4rem 2rem;
-      position: relative;
-      overflow: hidden;
+      color: white;
     }
 
     .hero h1 {
@@ -176,7 +193,6 @@
     .hero p {
       font-size: 1.1rem;
       margin-bottom: 1.8rem;
-      color: #e0e0ff;
     }
 
     .cta-buttons {
@@ -217,11 +233,6 @@
     .social-icons-hero a {
       color: white;
       font-size: 1.5rem;
-      transition: color 0.3s;
-    }
-
-    .social-icons-hero a:hover {
-      color: var(--secondary);
     }
 
     section {
@@ -247,17 +258,13 @@
     }
 
     .card {
-      background: rgba(20, 25, 45, 0.6);
+      background: rgba(20, 30, 50, 0.6);
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
       backdrop-filter: blur(5px);
-      transition: transform 0.3s;
       border: 1px solid rgba(0, 245, 255, 0.2);
-    }
-
-    .card:hover {
-      transform: translateY(-8px);
+      color: white;
     }
 
     .card img {
@@ -273,7 +280,6 @@
     .card h3 {
       margin-bottom: 0.6rem;
       font-size: 1.2rem;
-      color: white;
     }
 
     .card p {
@@ -282,7 +288,7 @@
     }
 
     .fun-fact {
-      background: rgba(26, 26, 46, 0.7);
+      background: rgba(26, 36, 60, 0.7);
       text-align: center;
       padding: 3.5rem 2rem;
       margin: 3rem 0;
@@ -290,7 +296,6 @@
       max-width: 800px;
       margin-left: auto;
       margin-right: auto;
-      position: relative;
       backdrop-filter: blur(5px);
       border: 1px solid rgba(0, 255, 128, 0.3);
     }
@@ -304,15 +309,15 @@
     .fun-fact p {
       font-size: 1.25rem;
       line-height: 1.7;
-      color: white;
     }
 
     footer {
-      background: rgba(10, 12, 20, 0.85);
+      background: rgba(10, 15, 30, 0.8);
       padding: 3rem 2rem;
       text-align: center;
       backdrop-filter: blur(10px);
       border-top: 1px solid rgba(0, 245, 255, 0.1);
+      color: white;
     }
 
     .footer-logo img {
@@ -343,22 +348,6 @@
       font-size: 0.9rem;
     }
 
-    /* Animasi keyframes */
-    @keyframes tail {
-      0%, 100% { width: 0; }
-      30% { width: 100px; }
-    }
-
-    @keyframes shining {
-      0%, 100% { width: 0; }
-      50% { width: 30px; }
-    }
-
-    @keyframes shooting {
-      0% { transform: translateX(0) translateY(0); }
-      100% { transform: translateX(300px) translateY(-300px); }
-    }
-
     /* RESPONSIVE */
     @media (max-width: 768px) {
       nav ul { display: none; }
@@ -376,12 +365,11 @@
 </head>
 <body>
 
-  <!-- Background Animasi -->
+  <!-- Background Meteor -->
   <div class="night" id="stars-bg"></div>
 
   <!-- Konten Utama -->
   <div id="main-content">
-
     <!-- Header -->
     <header>
       <div class="logo">
@@ -496,30 +484,50 @@
         &copy; 2026 Dnedia News. All rights reserved.
       </p>
     </footer>
-
   </div>
 
-  <!-- Generate 20 Shooting Stars via JavaScript -->
+  <!-- Script: Generate 30 Meteor Realistis -->
   <script>
     const starsBg = document.getElementById('stars-bg');
-    const delays = [];
-    for (let i = 0; i < 20; i++) {
+    const totalStars = 30;
+
+    for (let i = 0; i < totalStars; i++) {
       const star = document.createElement('div');
       star.className = 'shooting_star';
-      
-      // Random position & delay
-      const topOffset = (Math.random() * 400 - 200) + 'px';
-      const leftOffset = (Math.random() * 300) + 'px';
-      const delay = Math.random() * 10000 + 'ms';
-      
-      star.style.top = `calc(50% - ${topOffset})`;
-      star.style.left = `calc(50% - ${leftOffset})`;
-      star.style.animationDelay = delay;
-      
+
+      // Random mulai dari atas (luar layar)
+      const startX = Math.random() * window.innerWidth * 1.2 - window.innerWidth * 0.1;
+      const delay = Math.random() * 15000; // 0 - 15 detik
+      const duration = 2000 + Math.random() * 1500; // 2-3.5 detik
+
+      star.style.left = startX + 'px';
+      star.style.top = '-50px';
+      star.style.animationDelay = delay + 'ms';
+      star.style.animationDuration = duration + 'ms';
+
+      // Tambahkan variasi rotasi dan arah
+      const rotation = -10 + Math.random() * 20; // -10° sampai +10°
+      const endX = startX + (100 + Math.random() * 200); // jarak horizontal
+      const endY = 300 + Math.random() * 400; // jarak vertikal
+
+      // Simpan endX dan endY di CSS custom property agar bisa dipakai di keyframe
+      // Tapi karena keyframe tidak bisa dinamis, kita pakai transform langsung di JS (lebih mudah)
+      // ... atau kita gunakan pendekatan berbeda: biarkan semua meteor punya arah tetap, tapi posisi awal acak.
+
       starsBg.appendChild(star);
+
+      // Ulangi animasi setelah selesai
+      star.addEventListener('animationend', () => {
+        star.style.animation = 'none';
+        setTimeout(() => {
+          star.style.left = (Math.random() * window.innerWidth * 1.2 - window.innerWidth * 0.1) + 'px';
+          star.style.animation = `tail ${duration}ms ease-out, shooting ${duration}ms ease-out`;
+          star.style.animationDelay = '0ms';
+        }, delay + 2000);
+      });
     }
 
-    // Hamburger toggle
+    // Hamburger menu
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
 
