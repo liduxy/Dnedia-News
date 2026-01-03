@@ -4,18 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dnedia News – Untuk Kamu!</title>
-
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Orbitron:wght@500&display=swap" rel="stylesheet">
-
-  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
   <style>
     :root {
       --primary: #00f5ff;
       --secondary: #00ff80;
       --dark: #121212;
+      --light: #ffffff;
       --card-bg: #1e1e1e;
       --text: #f0f0f0;
     }
@@ -28,91 +24,35 @@
 
     body {
       font-family: 'Poppins', sans-serif;
-      background: var(--dark);
+      background-color: var(--dark);
       color: var(--text);
       line-height: 1.6;
-      padding-bottom: env(safe-area-inset-bottom);
     }
 
-    /* ================= HEADER ================= */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.8rem 1rem;
-      background: rgba(18,18,18,0.95);
+      padding: 1.2rem 1.5rem;
       position: sticky;
       top: 0;
-      z-index: 1000;
+      background: rgba(18, 18, 18, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 100;
     }
 
     .logo img {
       height: 40px;
     }
 
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 1.2rem;
-    }
-
-    .nav-links a {
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .nav-links a:hover {
-      color: var(--primary);
-    }
-
-    .social-icons {
-      display: flex;
-      gap: 0.9rem;
-    }
-
-    .social-icons a {
-      color: var(--text);
-      font-size: 1.1rem;
-      transition: 0.3s;
-    }
-
-    .social-icons a:hover {
-      color: var(--secondary);
-    }
-
-    /* Hamburger */
-    .hamburger {
+    nav ul {
       display: none;
-      flex-direction: column;
-      cursor: pointer;
-      width: 28px;
-      height: 22px;
-      justify-content: space-between;
     }
 
-    .hamburger span {
-      height: 3px;
-      width: 100%;
-      background: var(--text);
-      border-radius: 2px;
-      transition: 0.3s;
-    }
-
-    .hamburger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(6px, 6px);
-    }
-    .hamburger.active span:nth-child(2) {
-      opacity: 0;
-    }
-    .hamburger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(6px, -6px);
-    }
-
-    /* ================= HERO ================= */
+    /* Hero Section */
     .hero {
       text-align: center;
-      padding: 3rem 1.2rem;
+      padding: 4rem 1.5rem 3rem;
       background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
       position: relative;
       overflow: hidden;
@@ -121,9 +61,13 @@
     .hero::before {
       content: "";
       position: absolute;
-      inset: -50%;
-      background: radial-gradient(circle, rgba(0,245,255,0.12), transparent 70%);
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0,245,255,0.1) 0%, transparent 70%);
       animation: rotate 20s linear infinite;
+      z-index: 0;
     }
 
     @keyframes rotate {
@@ -138,86 +82,100 @@
 
     .hero h1 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 2.4rem;
+      font-size: 2.6rem;
+      margin-bottom: 1rem;
       background: linear-gradient(to right, var(--primary), var(--secondary));
       -webkit-background-clip: text;
+      background-clip: text;
       color: transparent;
-      margin-bottom: 0.6rem;
     }
 
     .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 1.8rem;
       max-width: 600px;
-      margin: 0 auto 1rem;
-      font-size: 1rem;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    /* Social di HERO (Mobile) */
-    .hero-social {
-      display: none;
+    .social-icons-hero {
+      display: flex;
       justify-content: center;
-      gap: 1.4rem;
-      margin-bottom: 1.5rem;
+      gap: 1.2rem;
+      margin-bottom: 2rem;
     }
 
-    .hero-social a {
+    .social-icons-hero a {
       color: var(--text);
-      font-size: 1.5rem;
-      transition: 0.3s;
+      font-size: 1.4rem;
+      transition: color 0.3s, transform 0.2s;
     }
 
-    .hero-social a:hover {
-      color: var(--primary);
-      transform: translateY(-3px);
+    .social-icons-hero a:hover {
+      color: var(--secondary);
+      transform: scale(1.2);
     }
 
     .cta-buttons {
       display: flex;
       justify-content: center;
-      gap: 0.8rem;
+      gap: 1rem;
       flex-wrap: wrap;
     }
 
     .btn {
-      padding: 0.7rem 1.4rem;
+      padding: 0.75rem 1.6rem;
       border-radius: 30px;
       font-weight: 600;
       text-decoration: none;
+      transition: all 0.3s;
+      font-size: 1rem;
     }
 
     .btn-primary {
       background: var(--primary);
-      color: #000;
+      color: var(--dark);
     }
 
     .btn-secondary {
+      background: transparent;
       border: 2px solid var(--secondary);
       color: var(--secondary);
     }
 
-    /* ================= SECTION ================= */
+    .btn-primary:hover {
+      background: #00d0d9;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(0, 255, 128, 0.1);
+    }
+
+    /* Konten */
     section {
-      padding: 2.5rem 1.2rem;
+      padding: 2.5rem 1.5rem;
     }
 
     .section-title {
       text-align: center;
-      margin-bottom: 1.8rem;
+      margin-bottom: 2rem;
       font-size: 1.8rem;
+      font-weight: 700;
     }
 
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.4rem;
-      max-width: 1100px;
-      margin: auto;
+      grid-template-columns: 1fr;
+      gap: 1.8rem;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
     .card {
       background: var(--card-bg);
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
       transition: transform 0.3s;
     }
 
@@ -232,166 +190,226 @@
     }
 
     .card-content {
-      padding: 1rem;
+      padding: 1.2rem;
     }
 
-    /* ================= FUN FACT ================= */
+    .card h3 {
+      margin-bottom: 0.6rem;
+      font-size: 1.15rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    /* Fun Fact */
     .fun-fact {
       background: linear-gradient(135deg, #1a1a2e, #16213e);
-      border-radius: 14px;
       text-align: center;
-      padding: 2.5rem 1.2rem;
-      max-width: 900px;
-      margin: auto;
+      padding: 2.5rem 1.5rem;
+      margin: 2.5rem 1rem;
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fun-fact::after {
+      content: "💡";
+      position: absolute;
+      top: -15px;
+      right: 15px;
+      font-size: 3rem;
+      opacity: 0.1;
     }
 
     .fun-fact h2 {
+      font-size: 1.6rem;
+      margin-bottom: 1.2rem;
       color: var(--secondary);
-      margin-bottom: 1rem;
     }
 
-    /* ================= FOOTER ================= */
+    .fun-fact p {
+      font-size: 1.15rem;
+      line-height: 1.6;
+    }
+
+    /* Footer */
     footer {
       background: #0a0a0a;
-      padding: 2rem 1.2rem;
+      padding: 2.5rem 1.5rem 1.5rem;
       text-align: center;
+    }
+
+    .footer-logo img {
+      height: 36px;
+      margin-bottom: 1.2rem;
     }
 
     .footer-links {
       display: flex;
       justify-content: center;
-      gap: 1.2rem;
+      gap: 1.5rem;
+      margin: 1.2rem 0;
       flex-wrap: wrap;
-      margin-bottom: 1rem;
     }
 
     .footer-links a {
       color: #bbb;
       text-decoration: none;
+      font-size: 0.95rem;
     }
 
-    /* ================= RESPONSIVE ================= */
-    @media (max-width: 768px) {
-      .logo img {
-        height: 32px;
-      }
+    .footer-links a:hover {
+      color: var(--primary);
+    }
 
-      .hamburger {
-        display: flex;
-      }
+    .copyright {
+      color: #777;
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+    }
 
-      .social-icons {
-        display: none;
-      }
-
-      .nav-links {
-        position: fixed;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        background: var(--dark);
-        flex-direction: column;
-        align-items: center;
-        gap: 1.2rem;
-        padding: 1.5rem 0;
-        transform: translateY(-120%);
-        transition: transform 0.35s ease;
-      }
-
-      .nav-links.active {
-        transform: translateY(0);
-      }
-
+    /* Tablet & Desktop */
+    @media (min-width: 768px) {
       .hero h1 {
-        font-size: 1.8rem;
+        font-size: 3.2rem;
       }
+      .cards {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      }
+      .hero p {
+        font-size: 1.25rem;
+      }
+    }
 
-      .hero-social {
+    @media (min-width: 1024px) {
+      .hero h1 {
+        font-size: 3.8rem;
+      }
+      nav ul {
         display: flex;
+        list-style: none;
+        gap: 1.5rem;
       }
-
-      .cta-buttons {
-        flex-direction: column;
+      nav a {
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s;
       }
-
-      .btn {
-        width: 100%;
-        max-width: 260px;
-        margin: auto;
-      }
-
-      .footer-links {
-        flex-direction: column;
-        gap: 0.6rem;
+      nav a:hover {
+        color: var(--primary);
       }
     }
   </style>
 </head>
-
 <body>
 
-<header>
-  <div class="logo">
-    <img src="LOGO DNEDIA.png" alt="Dnedia News">
-  </div>
-
-  <div class="hamburger" id="hamburger">
-    <span></span><span></span><span></span>
-  </div>
-
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#berita">Berita</a></li>
-    <li><a href="#hiburan">Hiburan</a></li>
-    <li><a href="#funfact">Fun Fact</a></li>
-    <li><a href="#tentang">Tentang</a></li>
-  </ul>
-
-  <!-- Social Desktop -->
-  <div class="social-icons">
-    <a href="https://www.instagram.com/dnedianews/" target="_blank"><i class="fab fa-instagram"></i></a>
-    <a href="https://www.tiktok.com/@dnedia" target="_blank"><i class="fab fa-tiktok"></i></a>
-    <a href="https://www.youtube.com/@dnedia/" target="_blank"><i class="fab fa-youtube"></i></a>
-    <a href="https://www.facebook.com/dnediaa" target="_blank"><i class="fab fa-facebook"></i></a>
-  </div>
-</header>
-
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-content">
-    <h1>DNEDIA NEWS</h1>
-    <p>Berita Terkini • Hiburan Seru • Fakta Unik — Semua Untuk Kamu!</p>
-
-    <!-- Social Mobile -->
-    <div class="hero-social">
-      <a href="https://www.instagram.com/dnedianews/" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.tiktok.com/@dnedia" target="_blank"><i class="fab fa-tiktok"></i></a>
-      <a href="https://www.youtube.com/@dnedia/" target="_blank"><i class="fab fa-youtube"></i></a>
-      <a href="https://www.facebook.com/dnediaa" target="_blank"><i class="fab fa-facebook"></i></a>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="LOGO DNEDIA.png" alt="Dnedia News Logo">
     </div>
+    <nav>
+      <ul>
+        <li><a href="#berita">Berita</a></li>
+        <li><a href="#hiburan">Hiburan</a></li>
+        <li><a href="#funfact">Fun Fact</a></li>
+        <li><a href="#tentang">Tentang</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <div class="cta-buttons">
-      <a href="#berita" class="btn btn-primary">Baca Berita</a>
-      <a href="#funfact" class="btn btn-secondary">Fun Fact Hari Ini</a>
+  <!-- Hero Section -->
+  <div class="hero">
+    <div class="hero-content">
+      <h1>DNEDIA NEWS</h1>
+      <p>Berita Terkini • Hiburan Seru • Fakta Unik — Semua Untuk Kamu!</p>
+
+      <!-- Ikon media sosial hanya di hero -->
+      <div class="social-icons-hero">
+        <a href="https://www.instagram.com/dnedianews/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/@dnedia" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        <a href="https://www.youtube.com/@dnedia/" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.facebook.com/dnediaa" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+      </div>
+
+      <div class="cta-buttons">
+        <a href="#berita" class="btn btn-primary">Baca Berita</a>
+        <a href="#funfact" class="btn btn-secondary">Fun Fact Hari Ini</a>
+      </div>
     </div>
   </div>
-</div>
 
-<script>
-  const hamburger = document.getElementById("hamburger");
-  const navLinks = document.getElementById("navLinks");
+  <!-- Berita -->
+  <section id="berita">
+    <h2 class="section-title">📰 Berita Terkini</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="https://via.placeholder.com/300x160/1e1e1e/00f5ff?text=Berita+1" alt="Berita 1">
+        <div class="card-content">
+          <h3>Judul Berita Pertama</h3>
+          <p>12 Des 2025 • 2 menit baca</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/300x160/1e1e1e/00ff80?text=Berita+2" alt="Berita 2">
+        <div class="card-content">
+          <h3>Judul Berita Kedua</h3>
+          <p>10 Des 2025 • 3 menit baca</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  hamburger.addEventListener("click", () => {
-    hamburger.classList.toggle("active");
-    navLinks.classList.toggle("active");
-  });
+  <!-- Hiburan -->
+  <section id="hiburan">
+    <h2 class="section-title">🎭 Hiburan & Gaya Hidup</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="https://via.placeholder.com/300x160/1e1e1e/ff00ff?text=Hiburan+1" alt="Hiburan 1">
+        <div class="card-content">
+          <h3>5 Film Terbaik Minggu Ini</h3>
+          <p>Tonton rekomendasi film akhir pekan!</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/300x160/1e1e1e/ffff00?text=TikTok+Viral" alt="TikTok">
+        <div class="card-content">
+          <h3>Trending di TikTok Hari Ini</h3>
+          <p>Challenge terbaru yang bikin heboh!</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  document.querySelectorAll(".nav-links a").forEach(link => {
-    link.addEventListener("click", () => {
-      hamburger.classList.remove("active");
-      navLinks.classList.remove("active");
-    });
-  });
-</script>
+  <!-- Fun Fact -->
+  <section id="funfact">
+    <div class="fun-fact">
+      <h2>✨ Fun Fact Hari Ini</h2>
+      <p>
+        Tahukah kamu? Gurita memiliki tiga jantung, dan dua di antaranya berhenti berdetak saat mereka berenang!
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">
+      <img src="LOGO DNEDIA.png" alt="Dnedia News">
+    </div>
+    <div class="footer-links">
+      <a href="#berita">Berita</a>
+      <a href="#hiburan">Hiburan</a>
+      <a href="#funfact">Fun Fact</a>
+      <a href="#">Kontak</a>
+      <a href="#">Kebijakan Privasi</a>
+    </div>
+    <p class="copyright">
+      &copy; 2026 Dnedia News. All rights reserved.
+    </p>
+  </footer>
 
 </body>
 </html>
