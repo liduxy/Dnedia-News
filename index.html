@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dnedia News – Untuk Kamu!</title>
 
-  <!-- Google Fonts -->
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Orbitron:wght@500&display=swap" rel="stylesheet">
 
-  <!-- Font Awesome -->
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
@@ -16,7 +16,6 @@
       --primary: #00f5ff;
       --secondary: #00ff80;
       --dark: #121212;
-      --light: #ffffff;
       --card-bg: #1e1e1e;
       --text: #f0f0f0;
     }
@@ -75,6 +74,7 @@
     .social-icons a {
       color: var(--text);
       font-size: 1.1rem;
+      transition: 0.3s;
     }
 
     .social-icons a:hover {
@@ -147,8 +147,27 @@
 
     .hero p {
       max-width: 600px;
-      margin: 0 auto 1.5rem;
+      margin: 0 auto 1rem;
       font-size: 1rem;
+    }
+
+    /* Social di HERO (Mobile) */
+    .hero-social {
+      display: none;
+      justify-content: center;
+      gap: 1.4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-social a {
+      color: var(--text);
+      font-size: 1.5rem;
+      transition: 0.3s;
+    }
+
+    .hero-social a:hover {
+      color: var(--primary);
+      transform: translateY(-3px);
     }
 
     .cta-buttons {
@@ -163,12 +182,11 @@
       border-radius: 30px;
       font-weight: 600;
       text-decoration: none;
-      transition: 0.3s;
     }
 
     .btn-primary {
       background: var(--primary);
-      color: var(--dark);
+      color: #000;
     }
 
     .btn-secondary {
@@ -185,7 +203,6 @@
       text-align: center;
       margin-bottom: 1.8rem;
       font-size: 1.8rem;
-      font-weight: 700;
     }
 
     .cards {
@@ -218,16 +235,6 @@
       padding: 1rem;
     }
 
-    .card h3 {
-      font-size: 1.1rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .card p {
-      font-size: 0.9rem;
-      color: #aaa;
-    }
-
     /* ================= FUN FACT ================= */
     .fun-fact {
       background: linear-gradient(135deg, #1a1a2e, #16213e);
@@ -250,11 +257,6 @@
       text-align: center;
     }
 
-    .footer-logo img {
-      height: 36px;
-      margin-bottom: 1rem;
-    }
-
     .footer-links {
       display: flex;
       justify-content: center;
@@ -268,27 +270,18 @@
       text-decoration: none;
     }
 
-    .footer-links a:hover {
-      color: var(--primary);
-    }
-
-    .copyright {
-      color: #777;
-      font-size: 0.85rem;
-    }
-
     /* ================= RESPONSIVE ================= */
     @media (max-width: 768px) {
       .logo img {
         height: 32px;
       }
 
-      .social-icons {
-        display: none;
-      }
-
       .hamburger {
         display: flex;
+      }
+
+      .social-icons {
+        display: none;
       }
 
       .nav-links {
@@ -313,8 +306,8 @@
         font-size: 1.8rem;
       }
 
-      .hero p {
-        font-size: 0.95rem;
+      .hero-social {
+        display: flex;
       }
 
       .cta-buttons {
@@ -353,64 +346,35 @@
     <li><a href="#tentang">Tentang</a></li>
   </ul>
 
+  <!-- Social Desktop -->
   <div class="social-icons">
-    <a href="#"><i class="fab fa-instagram"></i></a>
-    <a href="#"><i class="fab fa-tiktok"></i></a>
-    <a href="#"><i class="fab fa-youtube"></i></a>
-    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="https://www.instagram.com/dnedianews/" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.tiktok.com/@dnedia" target="_blank"><i class="fab fa-tiktok"></i></a>
+    <a href="https://www.youtube.com/@dnedia/" target="_blank"><i class="fab fa-youtube"></i></a>
+    <a href="https://www.facebook.com/dnediaa" target="_blank"><i class="fab fa-facebook"></i></a>
   </div>
 </header>
 
+<!-- HERO -->
 <div class="hero">
   <div class="hero-content">
     <h1>DNEDIA NEWS</h1>
     <p>Berita Terkini • Hiburan Seru • Fakta Unik — Semua Untuk Kamu!</p>
+
+    <!-- Social Mobile -->
+    <div class="hero-social">
+      <a href="https://www.instagram.com/dnedianews/" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@dnedia" target="_blank"><i class="fab fa-tiktok"></i></a>
+      <a href="https://www.youtube.com/@dnedia/" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.facebook.com/dnediaa" target="_blank"><i class="fab fa-facebook"></i></a>
+    </div>
+
     <div class="cta-buttons">
       <a href="#berita" class="btn btn-primary">Baca Berita</a>
       <a href="#funfact" class="btn btn-secondary">Fun Fact Hari Ini</a>
     </div>
   </div>
 </div>
-
-<section id="berita">
-  <h2 class="section-title">📰 Berita Terkini</h2>
-  <div class="cards">
-    <div class="card">
-      <img src="https://via.placeholder.com/400x200" alt="">
-      <div class="card-content">
-        <h3>Judul Berita Pertama</h3>
-        <p>12 Des 2025 • 2 menit baca</p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/400x200" alt="">
-      <div class="card-content">
-        <h3>Judul Berita Kedua</h3>
-        <p>10 Des 2025 • 3 menit baca</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="funfact">
-  <div class="fun-fact">
-    <h2>✨ Fun Fact Hari Ini</h2>
-    <p>Gurita memiliki tiga jantung, dan dua di antaranya berhenti berdetak saat berenang.</p>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-logo">
-    <img src="LOGO DNEDIA.png" alt="">
-  </div>
-  <div class="footer-links">
-    <a href="#berita">Berita</a>
-    <a href="#hiburan">Hiburan</a>
-    <a href="#funfact">Fun Fact</a>
-    <a href="#">Kontak</a>
-  </div>
-  <p class="copyright">© 2026 Dnedia News</p>
-</footer>
 
 <script>
   const hamburger = document.getElementById("hamburger");
